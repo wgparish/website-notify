@@ -3,8 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+.idea/
 # C extensions
 *.so
+client_secret*
 
 # Distribution / packaging
 .Python
