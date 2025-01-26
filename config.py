@@ -6,3 +6,4 @@ from dotenv import load_dotenv
 load_dotenv()
 TEXTBELT_API_KEY = os.getenv("TEXTBELT_API_KEY")
 SEND_SMS_TO = os.getenv("SEND_SMS_TO")
+SEND_SMS_TO_GPU = os.getenv("SEND_SMS_TO_GPU")

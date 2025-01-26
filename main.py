@@ -7,16 +7,15 @@ from fastapi import FastAPI
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from check_product import check_little_sleepies, check_meyers
+from check_product import check_little_sleepies, check_newegg
+from config import SEND_SMS_TO_GPU
 
 
 # Define your scheduled tasks
 async def minute_task():
     print(f"Running minute task at {datetime.now()}")
-    check_little_sleepies("around-the-world-large-cloud-blanket", "")
-    check_meyers("bourbon-red-heritage-day-old-turkey-poults")
-    check_meyers("narragansett-heritage-day-old-turkey-poults")
-    check_meyers("black-spanish-heritage-day-old-turkey-poults")
+    check_newegg("acer-nitro-an-b580-oca-intel-12gb-gddr6/p/N82E16814553012", SEND_SMS_TO_GPU)
+    check_newegg("p/N82E16814883006", SEND_SMS_TO_GPU)
     # Your task logic here
 
 # Wrapper function to handle async tasks
@@ -31,7 +30,7 @@ async def lifespan(app: FastAPI):
     # Add jobs to the scheduler
     scheduler.add_job(
         run_async_task,
-        trigger=CronTrigger(minute='*/5'),  # Run every hour
+        trigger=CronTrigger(second='*/15'),
         id='minute_task',
         name='Run minute task',
         args=[minute_task],
