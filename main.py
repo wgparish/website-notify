@@ -7,7 +7,7 @@ from fastapi import FastAPI
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from check_product import check_little_sleepies, check_newegg
+from check_product import check_little_sleepies, check_newegg, check_bhphoto
 from config import SEND_SMS_TO_GPU
 
 
@@ -16,6 +16,7 @@ async def minute_task():
     print(f"Running minute task at {datetime.now()}")
     check_newegg("acer-nitro-an-b580-oca-intel-12gb-gddr6/p/N82E16814553012", SEND_SMS_TO_GPU)
     check_newegg("p/N82E16814883006", SEND_SMS_TO_GPU)
+    check_bhphoto("1869297-REG/intel_31p06hb0ba_arc_b580_limited_edition.html", SEND_SMS_TO_GPU)
     # Your task logic here
 
 # Wrapper function to handle async tasks

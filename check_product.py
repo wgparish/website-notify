@@ -52,6 +52,21 @@ def check_newegg(product_id: str, phone_number: str):
         print(f"Stock - Newegg - {product_id}")
         send_sms(f"Product is in stock! Please go to Newegg - {product_id}", phone_number)
 
+def check_bhphoto(product_id: str, phone_number: str):
+    # URL of the page to scrape
+    url = 'https://www.bhphotovideo.com/c/product/' + product_id
+
+    # Fetch the page content using requests
+    response = requests.get(url)
+
+    if is_sold_out(response.text):
+        print(f"No stock - B&H - {product_id}")
+        return {"message": 'Product is out of stock.'}
+    else:
+        # send_sms(f"Product is in stock! Please go to {url}")
+        print(f"Stock - B&H - {product_id}")
+        send_sms(f"Product is in stock! Please go to B&H - {product_id}", phone_number)
+
 def is_sold_out(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
 
